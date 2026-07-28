@@ -1,0 +1,21 @@
+:host{display:flex;flex-direction:column;height:100%}
+.loading,.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1rem;color:var(--ion-color-medium)}
+.empty{padding:4rem 2rem;text-align:center}
+.empty .icon{font-size:4rem;margin-bottom:1rem;opacity:.5}
+.empty h3{margin:0 0 .5rem;font-size:1.25rem;font-weight:600;color:var(--mm-notification-text,var(--ion-text-color))}
+.empty p{font-size:.9rem;line-height:1.5;color:var(--mm-subtext-light-grey)}
+.list{background:transparent;padding:.5rem 0}
+.item{--padding-start:1rem;--padding-end:.5rem;--padding-top:.75rem;--padding-bottom:.75rem;--inner-padding-end:0;--background:transparent;--border-color:var(--ion-background-color-step-100);border-bottom:1px solid var(--ion-background-color-step-100)}
+.item.unread{--background:rgba(var(--mm-primary-green-rgb,141,199,63),0.06)}
+.icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--mm-primary-green,#1a7d36);border:2px solid var(--mm-secondary-emerald,#69e8a6);flex-shrink:0;margin-right:.75rem}
+.icon.image{background:0;border:0}
+.icon ion-icon{font-size:1.4rem;color:#fff}
+.icon app-image-loader{width:44px;height:44px}
+.header{display:flex;align-items:center;gap:.4rem;margin-bottom:.15rem}
+.header .btn{margin-left:auto;--padding-start:.25rem;--padding-end:.25rem;height:44px}
+.header .btn ion-icon{font-size:1.5rem}
+.title{font-size:.95rem;font-weight:600;color:var(--mm-notification-text,var(--ion-text-color));line-height:1.3}
+.ring{width:10px;height:10px;border-radius:50%;border:2px solid var(--ion-color-primary,#69e8a6);flex-shrink:0}
+.sub{font-size:.82rem;font-weight:500;color:var(--mm-secondary-emerald,var(--ion-color-primary-shade));margin:.1rem 0 .2rem}
+.desc{font-size:.82rem;color:var(--mm-subtext-light-grey);margin:.1rem 0 0;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.time{font-size:.72rem;color:var(--mm-subtext-light-grey)}

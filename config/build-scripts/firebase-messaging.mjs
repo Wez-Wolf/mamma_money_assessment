@@ -11,6 +11,13 @@ function addToApplication(dom, xml) {
 
 async function addFcmService(manifestPath) {
   const manifestContent = await fs.readFile(manifestPath, 'utf-8');
+
+  // Skip if service already declared
+  if (manifestContent.includes('MmFirebaseMessagingService')) {
+    console.log('MmFirebaseMessagingService already in manifest, skipping');
+    return;
+  }
+
   const parser = new DOMParser();
   const serializer = new XMLSerializer();
   let dom = parser.parseFromString(manifestContent, 'application/xml');
@@ -26,6 +33,7 @@ async function addFcmService(manifestPath) {
 
   const updatedManifestContent = serializer.serializeToString(dom);
   await fs.writeFile(manifestPath, updatedManifestContent, 'utf-8');
+  console.log('Added MmFirebaseMessagingService to manifest');
 }
 
 // Execute if run directly

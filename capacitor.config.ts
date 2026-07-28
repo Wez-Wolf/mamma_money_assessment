@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import type { CapacitorConfig } from '@capacitor/cli';
 import 'dotenv/config';
 

@@ -1,0 +1,90 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Inbox</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" fill="clear">
+        <ion-icon slot="icon-only" name="close-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (inboxState.loading()) {
+    <div class="loading">
+      <app-spinner [scale]="3" color="primary"></app-spinner>
+      <p class="m-t-2">Loading messages…</p>
+    </div>
+  }
+
+  @if (!inboxState.loading() && inboxState.cards().length === 0) {
+    <div class="empty">
+      <ion-icon name="notifications-outline" color="medium" class="icon"></ion-icon>
+      <h3>No Messages</h3>
+      <p class="m-0">
+        You don't have any inbox messages yet.<br />
+        Tap <strong>Send Test Event</strong> to trigger one.
+      </p>
+    </div>
+  }
+
+  @if (inboxState.cards().length > 0) {
+    <ion-list class="list" lines="none">
+      @for (card of inboxState.cards(); track trackById($index, card)) {
+        <ion-item
+          class="item"
+          [class.unread]="!card.viewed"
+          (click)="onCardTap(card)"
+          button
+        >
+          <div slot="start" class="icon" [class.image]="!!card.image">
+            @if (card.image) {
+              <app-image-loader
+                [src]="card.image"
+                skeletonDiameter="44px"
+                skeletonBorderRadius="50%"
+                maxWidth="44px"
+              ></app-image-loader>
+            } @else {
+              <ion-icon name="cash-outline"></ion-icon>
+            }
+          </div>
+
+          <ion-label class="ion-text-wrap">
+            <div class="header">
+              <span class="title">{{ card.title }}</span>
+              @if (!card.viewed) {
+                <span class="ring"></span>
+              }
+              @if (card.dismissible) {
+                <ion-button
+                  fill="clear"
+                  size="small"
+                  class="btn"
+                  slot="end"
+                  (click)="$event.stopPropagation(); confirmDismiss(card)"
+                >
+                  <ion-icon slot="icon-only" name="close-circle-outline" color="danger"></ion-icon>
+                </ion-button>
+              }
+            </div>
+
+            @if (card.extras.subtitle) {
+              <p class="sub">{{ card.extras.subtitle }}</p>
+            }
+
+            @if (card.cardDescription) {
+              <p class="desc">{{ card.cardDescription }}</p>
+            }
+
+            <span class="time m-t-1">{{ card.created | dateTimeString }}</span>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
+</ion-content>

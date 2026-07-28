@@ -28,6 +28,7 @@ import { IonHeader, IonContent, IonButton } from '@ionic/angular/standalone';
 })
 export class HomePage {
   sendInboxTestEvent(): void {
-    // TODO: Log Braze custom event INBOX_MESSAGE_TEST to trigger an Inbox push notification and accompanying content card
+   window.BrazePlugin?.logCustomEvent('INBOX_MESSAGE_TEST');                                                                                                               
+   window.BrazePlugin?.requestImmediateDataFlush();   
   }
 }

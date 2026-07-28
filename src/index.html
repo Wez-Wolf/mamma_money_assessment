@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#4E9B46;">
   <head>
     <meta charset="utf-8" />
     <title>Frontend Technical Assessment</title>
-
     <base href="/" />
-
     <meta name="color-scheme" content="light" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-
     <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
-
-    <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <style>
+      html, body { background: #4E9B46; margin: 0; height: 100%; }
+    </style>
   </head>
-
   <body>
     <app-root></app-root>
+    <div id="app-splash" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:#4E9B46 url('assets/splash-dark.png') no-repeat center/contain;"></div>
   </body>
 </html>

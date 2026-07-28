@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, input, signal } from '@angular/core';
+import { AfterViewInit, Component, input, signal,effect,inject, computed } from '@angular/core';
 import { IonButton, IonIcon, IonAccordion } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { notificationsOutline } from 'ionicons/icons';
 import anime, { AnimeInstance } from 'animejs';
+import { ModalController } from '@ionic/angular/standalone';                                                                                                                                                                                                                 
+import { InboxStateService } from '@services/inbox-state.service'; 
 
 @Component({
   selector: 'app-inbox-button',
@@ -42,22 +44,27 @@ import anime, { AnimeInstance } from 'animejs';
 })
 export class InboxButtonComponent implements AfterViewInit {
   readonly slot = input<IonAccordion['toggleIconSlot']>();
-  unreadMessages = signal(false);
+  unreadMessages = computed(() => this.inboxState.unreadCount() > 0);
   private shakeAnimation?: AnimeInstance;
-
+  private readonly modalCtrl = inject(ModalController);                                                                                                                                                                                                                        
+  readonly inboxState = inject(InboxStateService);
   constructor() {
     addIcons({ notificationsOutline });
+     effect(() => {                                                                                                                                                                                                        
+       if (this.unreadMessages()) setTimeout(() => this.shakeAnimation?.restart(), 100);                                                                                                                                   
+     }); 
   }
 
-  showInbox(): void {
-    // TODO: Show Inbox component in Modal when tapping Bell icon
-  }
-
-  // TODO: When receiving/reading new Braze inbox message, update notification state.
-  // Icon should play the shake animation when new unread messages are received.
-  //   this.unreadMessages = true;
-  //   this.shakeAnimation?.restart();
-
+  async showInbox(): Promise<void> {                                                                                                                                                                                    
+       const { InboxComponent } = await import('@components/inbox/inbox.component');                                                                                                                                       
+       const modal = await this.modalCtrl.create({                                                                                                                                                                         
+         component: InboxComponent,                                                                                                                                                                                        
+         breakpoints: [0, 0.75, 1],                                                                                                                                                                                        
+         initialBreakpoint: 1,                                                                                                                                                                                             
+       });                                                                                                                                                                                                                 
+       await modal.present();                                                                                                                                                                                              
+     }                                                                                                                                                                                                                     
+                                                                                                                            
   ngAfterViewInit(): void {
     this.shakeAnimation = anime({
       targets: '.bell',
