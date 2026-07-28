@@ -131,3 +131,7 @@ npx cap run android
 - **Card data from push payload**: The `ab_cd` field in the Braze push notification contains the content card data. Parsing it directly avoids an extra server call and eliminates the race condition between push arrival and card availability.
 - **Web-layer splash**: Android 12+ forces a system SplashScreen API that doesn't support full-screen images. An HTML overlay in `index.html` bypasses this limitation completely.
 - **Client-side dismissed/viewed tracking**: Braze doesn't persist these states locally. Without tracking, dismissed cards reappear on re-fetch and viewed cards lose their read state.
+
+### AI assistance                                                                       
+                                                                                           
+This implementation was developed with the assistance of an AI coding tool (pi.dev) working under human direction.  
